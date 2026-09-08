@@ -4,8 +4,12 @@ const q=document.getElementById('q'), sex=document.getElementById('sex'), gen=do
 function esc(s){return s.replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;').replaceAll("'",'&#39;')}
 function rel(g,s){if(g===1)return s==='F'?'мать':s==='M'?'отец':'Предок 1-го поколения';if(g===2)return s==='F'?'бабушка':s==='M'?'дед':'Предок 2-го поколения';if(g===3)return s==='F'?'прабабушка':s==='M'?'прадед':'Предок 3-го поколения';return 'Предок '+g+'-го поколения'}
 function draw(){
- const t=q.value.trim().toLowerCase(), sx=sex.value, gv=gen.value;
- const a=P.filter(x=>(!t||x.n.toLowerCase().includes(t))&&(!sx||x.s===sx)&&(!gv||(gv==='ancestors'?x.g!=null:(gv==='none'?x.g==null:String(x.g)===gv))));
+ const tokens=q.value.trim().toLowerCase().split(/\s+/).filter(Boolean), sx=sex.value, gv=gen.value;
+ const a=P.filter(x=>{
+   const words=x.n.toLowerCase().split(/\s+/).filter(Boolean);
+   const nameOk=!tokens.length || tokens.every(t=>words.some(w=>w.startsWith(t)));
+   return nameOk&&(!sx||x.s===sx)&&(!gv||(gv==='ancestors'?x.g!=null:(gv==='none'?x.g==null:String(x.g)===gv)));
+ });
  list.innerHTML=a.map(x=>'<div class="person"><a href="person/'+x.u+'.html">'+esc(x.n)+'</a>'+(x.g?'<div class="ancestor-label"><strong>'+rel(x.g,x.s)+'</strong></div>':'')+'</div>').join('');
 }
 q.addEventListener('input',draw);sex.addEventListener('change',draw);gen.addEventListener('change',draw);draw();
