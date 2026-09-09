@@ -6,6 +6,7 @@ const gen=document.getElementById('gen');
 const life=document.getElementById('life');
 const list=document.getElementById('list');
 const count=document.getElementById('count');
+const stateKey='familytree-filters';
 
 function esc(s){
   return s.replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;').replaceAll("'",'&#39;');
@@ -37,6 +38,28 @@ function generationMatches(g, value){
   return String(g)===value;
 }
 
+function saveState(){
+  sessionStorage.setItem(stateKey, JSON.stringify({
+    q:q.value,
+    sex:sex.value,
+    gen:gen.value,
+    life:life.value
+  }));
+}
+
+function restoreState(){
+  try{
+    const saved=JSON.parse(sessionStorage.getItem(stateKey) || 'null');
+    if(!saved) return;
+    q.value=typeof saved.q==='string'?saved.q:'';
+    sex.value=typeof saved.sex==='string'?saved.sex:'';
+    gen.value=typeof saved.gen==='string'?saved.gen:'';
+    life.value=typeof saved.life==='string'?saved.life:'';
+  }catch(e){
+    sessionStorage.removeItem(stateKey);
+  }
+}
+
 function draw(){
   const text=q.value.trim();
   const sx=sex.value;
@@ -56,11 +79,13 @@ function draw(){
     (x.g?'<div class="ancestor-label"><strong>'+rel(x.g,x.s)+'</strong></div>':'')+
     '</div>'
   ).join('');
+  saveState();
 }
 
 q.addEventListener('input',draw);
 sex.addEventListener('change',draw);
 gen.addEventListener('change',draw);
 life.addEventListener('change',draw);
+restoreState();
 draw();
 </script></body></html>
