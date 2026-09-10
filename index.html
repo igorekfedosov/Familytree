@@ -68,28 +68,24 @@ function matchesFilters(x){
   return (!sx || x.s===sx) && generationMatches(x.g,gv) && statusMatches(x.d,lv);
 }
 
+function resultHtml(x){
+  return '<div class="person"><a href="person/'+x.u+'.html">'+esc(x.n)+'</a>'+ 
+    (x.g?'<div class="ancestor-label"><strong>'+rel(x.g,x.s)+'</strong></div>':'')+
+    '</div>';
+}
+
 function draw(){
   const text=q.value.trim();
   const filteredBase=P.filter(matchesFilters);
 
   const personMatches=text ? filteredBase.filter(x=>searchMatches(x.n,text)) : filteredBase;
-  const bioMatches=text ? filteredBase.filter(x=>!searchMatches(x.n,text) && searchMatches(x.b,text)) : [];
+  const bioMatches=text ? filteredBase.filter(x=>!searchMatches(x.n,text) && searchMatches(x.b,text)) : filteredBase.filter(x=>x.b.trim());
 
   countPersons.textContent='Персоны: '+personMatches.length;
   countBios.textContent='Биографии: '+bioMatches.length;
 
-  const personHtml=personMatches.map(x=>
-    '<div class="person"><a href="person/'+x.u+'.html">'+esc(x.n)+'</a>'+ 
-    (x.g?'<div class="ancestor-label"><strong>'+rel(x.g,x.s)+'</strong></div>':'')+
-    '</div>'
-  ).join('');
-
-  const bioHtml=bioMatches.map(x=>
-    '<div class="person"><a href="person/'+x.u+'.html">'+esc(x.n)+'</a>'+ 
-    (x.g?'<div class="ancestor-label"><strong>'+rel(x.g,x.s)+'</strong></div>':'')+
-    '</div>'
-  ).join('');
-
+  const personHtml=personMatches.map(resultHtml).join('');
+  const bioHtml=bioMatches.map(resultHtml).join('');
   const separator=personHtml && bioHtml ? '<div class="search-separator"></div>' : '';
   list.innerHTML=personHtml+separator+bioHtml;
   saveState();
