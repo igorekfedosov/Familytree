@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 190" role="img" aria-labelledby="title desc">
+  <title id="title">Пишем семейную историю</title>
+  <desc id="desc">Старинная сепия с надписью Пишем семейную историю</desc>
+  <defs>
+    <linearGradient id="paper" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ead9b7"/><stop offset="0.5" stop-color="#f3e5c8"/><stop offset="1" stop-color="#ddc395"/></linearGradient>
+    <filter id="grain" x="0" y="0" width="100%" height="100%"><feTurbulence type="fractalNoise" baseFrequency="0.035" numOctaves="2" seed="7"/><feColorMatrix values="1 0 0 0 0.48  0 1 0 0 0.36  0 0 1 0 0.20  0 0 0 .12 0"/></filter>
+    <radialGradient id="fade"><stop offset="0" stop-color="#fff" stop-opacity=".18"/><stop offset="1" stop-color="#8a6a3d" stop-opacity=".12"/></radialGradient>
+  </defs>
+  <rect width="1600" height="190" fill="url(#paper)"/><rect width="1600" height="190" fill="url(#fade)"/><rect width="1600" height="190" filter="url(#grain)" opacity=".32"/>
+  <g fill="none" stroke="#745733" stroke-linecap="round" opacity=".38"><path d="M105 173 C112 142 112 112 116 78 M116 111 C95 94 82 77 73 58 M116 98 C135 82 148 68 158 49 M116 133 C98 121 86 110 75 95 M116 126 C137 113 151 101 164 85" stroke-width="5"/><path d="M54 61 C65 35 93 27 119 39 C136 19 174 26 182 54 C204 56 214 76 204 94 C190 112 159 105 146 99 C126 116 91 111 81 92 C53 91 41 77 54 61Z" fill="#8c7047" stroke="none"/></g>
+  <g fill="none" stroke="#8a6b42" stroke-width="1.2" opacity=".18"><path d="M1270 35 C1320 22 1370 43 1418 30 S1510 34 1560 20"/><path d="M1215 57 C1280 44 1335 66 1400 51 S1500 59 1575 43"/><path d="M1230 79 C1290 68 1350 88 1410 73 S1510 82 1580 67"/><path d="M1260 101 C1320 90 1370 108 1435 96 S1520 104 1585 91"/></g>
+  <g transform="translate(1510 96)" stroke="#745733" fill="none" opacity=".38"><circle r="67" stroke-width="2"/><circle r="56" stroke-width="1"/><path d="M0-58 L9-9 L58 0 L9 9 L0 58 L-9 9 L-58 0 L-9-9 Z" fill="#8b6b3f" opacity=".45"/><path d="M0-42 L7-7 L42 0 L7 7 L0 42 L-7 7 L-42 0 L-7-7 Z"/><text x="0" y="-74" text-anchor="middle" font-family="Georgia,serif" font-size="15" fill="#745733" stroke="none">N</text></g>
+  <g fill="#4e351d" text-anchor="middle"><text x="800" y="91" font-family="Georgia, 'Times New Roman', serif" font-size="54" font-style="italic">Пишем семейную историю</text><path d="M405 116 H665 M935 116 H1195" stroke="#765737" stroke-width="1.5" opacity=".7"/><path d="M790 112 C780 124 770 124 761 114 C774 132 789 132 800 116 C811 132 826 132 839 114 C830 124 820 124 810 112" fill="none" stroke="#765737" stroke-width="1.8"/></g>
+</svg>
