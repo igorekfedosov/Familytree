@@ -19,4 +19,15 @@ function matchesFilters(x){return (!sex.value||x.s===sex.value)&&generationMatch
 function resultHtml(x, bioResult){return '<div class="person'+(bioResult?' bio-result':'')+'"><a href="person/'+x.u+'.html">'+esc(x.n)+'</a>'+(x.g?'<div class="ancestor-label"><strong>'+rel(x.g,x.s)+'</strong></div>':'')+'</div>';}
 function draw(){const text=q.value.trim();const filteredBase=P.filter(matchesFilters);const personMatches=text?filteredBase.filter(x=>searchMatches(x.n,text)):filteredBase;const bioMatches=text?filteredBase.filter(x=>!searchMatches(x.n,text)&&searchMatches(x.b,text)):filteredBase.filter(x=>x.b.trim());countPersons.textContent='Персоны: '+personMatches.length;countBios.textContent='Биографии: '+bioMatches.length;const personHtml=personMatches.map(x=>resultHtml(x,false)).join('');const bioHtml=bioMatches.map(x=>resultHtml(x,true)).join('');const separator=personHtml&&bioHtml?'<div class="search-separator"></div>':'';list.innerHTML=personHtml+separator+bioHtml;saveState();}
 q.addEventListener('input',draw);sex.addEventListener('change',draw);gen.addEventListener('change',draw);life.addEventListener('change',draw);restoreState();draw();
+</script><script>
+const latinToCyr = {
+  'a':'а','b':'б','c':'ц','d':'д','e':'е','f':'ф','g':'г','h':'х','i':'и','j':'й','k':'к','l':'л','m':'м','n':'н','o':'о','p':'п','q':'к','r':'р','s':'с','t':'т','u':'у','v':'в','w':'в','x':'кс','y':'й','z':'з'
+};
+function translitForSearch(s){
+  return s.toLowerCase().replace(/[a-z]/g, ch => latinToCyr[ch] || ch);
+}
+const originalSearchMatches = searchMatches;
+searchMatches = function(searchText, query){
+  return originalSearchMatches(searchText, query) || originalSearchMatches(translitForSearch(searchText), query);
+};
 </script></body></html>
