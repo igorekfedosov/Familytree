@@ -11,11 +11,6 @@ html.private-person-locked body > *:not(#private-person-gate){visibility:hidden!
 </style>
 <script>
 (function(){
-  const accessKey='familytree-private-person-access';
-  let allowed=false;
-  try{allowed=sessionStorage.getItem(accessKey)==='ok'}catch(error){}
-  if(allowed)return;
-
   document.documentElement.classList.add('private-person-locked');
   document.addEventListener('DOMContentLoaded',function(){
     const gate=document.createElement('div');
@@ -29,7 +24,6 @@ html.private-person-locked body > *:not(#private-person-gate){visibility:hidden!
     form.addEventListener('submit',function(event){
       event.preventDefault();
       if(input.value.trim()==='5158'){
-        try{sessionStorage.setItem(accessKey,'ok')}catch(storageError){}
         document.documentElement.classList.remove('private-person-locked');
         gate.remove();
       }else{
@@ -46,6 +40,7 @@ html.private-person-locked body > *:not(#private-person-gate){visibility:hidden!
 <div class="bio"><p>Девичья фамилия — Филимонова. Родилась 30 июля 1958 г. в д. Поповка Московской области (ныне Москва). Там же прошли её детские и юношеские годы. В 1975 г. Валентина окончила Горчаковскую среднюю школу, а сразу после этого ей предложили без конкурса поступить в Москов­ский региональный педагогический институт. Валентина нехотя согласилась и начала осваивать профессию учителя английского и немецкого языков. Это решение определило всю её дальнейшую профессиональную деятельность.</p><p>Вскоре после начала учёбы Валентина переехала в Москву и жила в институтском общежитии, где приобрела немало новых друзей и знакомых. Через них она и познакомилась со своим будущим мужем — <a href="https://igorekfedosov.github.io/Familytree/person/I500007.html" target="_blank" rel="noopener noreferrer">Валерием Федосовым</a>. В летние месяцы они вместе работали пионервожатыми в детском лагере. А в ноябре 1978 г. они поженились, и Валентина ненадолго переехала к родителям мужа на Черноморский бульвар. Однако к маю 1979 г., когда родилась старшая дочь <u>Светлана</u>, молодая семья уже находилась в съёмной квартире на Нагорной улице, а позже перебралась и в другое жильё — на Профсоюзной улице. В 1983 г. мать Валентины, <a href="https://igorekfedosov.github.io/Familytree/person/I500020.html" target="_blank" rel="noopener noreferrer">Дарья Андреевна</a>, сделала молодым щедрый подарок, когда внесла первый взнос за квартиру в новостройке на улице Мусы Джалиля, на юге Москвы. Благодаря этому семья наконец вселилась в собственное жильё. Уже по новому адресу в сентябре 1985 г. родился сын <a href="https://igorekfedosov.github.io/Familytree/person/I500003.html" target="_blank" rel="noopener noreferrer">Игорь</a>.</p><p>В феврале 1997 г. брак Валентины, увы, распался по инициативе мужа. К тому моменту он уже какое-то время жил отдельно от семьи. А в 2001 г. начала жить отдельно и старшая дочь Светлана. Однако уже в 2009 г. в квартире Валентины Алексеевны поселилась молодая жена Игоря, Анна, а затем родилась и внучка Виктория (2014), так что в доме снова стало людно.</p><p>Летом 2010 г. Валентина Алексеевна начала строительство собственного дачного дома на участке, где когда-то прошло её детство и юные годы. Тем не менее большую часть времени она продолжала находиться в московской квартире. С 2018 г., когда семья сына переехала в Германию, Валентина Алексеевна проживает в этой квартире одна. А в мае 2023 г., когда в Германию переехала и семья Светланы, почти все близкие родственники Валентины Алексеевны оказались за границей.</p><p>В московских школах Валентина Алексеевна проработала в общей сложности 40 лет. В 2002 г. ей было присвоено звание почётного работника народного образования и ветерана труда. Последним и самым продолжительным местом работы стала гимназия № 1552. По работе ей доводилось много раз бывать в командировках в Великобритании. С 2020 г. Валентина Алексеевна ведёт только частную преподавательскую деятельность.</p><p>В настоящее время проживает в Москве. Любит читать и путешествовать, регулярно посещает музеи и театры. Свободно владеет английским.</p></div></main><!-- SHARE_CONTROLS_START -->
 <style>
 .share-button{display:inline-block;margin:0 0 20px 12px;padding:7px 12px;border:1px solid #aaa;border-radius:7px;background:#fff;color:#222;font:inherit;font-size:15px;line-height:1.4;cursor:pointer}
+main .person-photo{margin:12px 0 18px}main .person-photo img{display:block;width:auto;max-width:min(100%,420px);max-height:65vh;height:auto;object-fit:contain}main .bio{font-size:18px;line-height:1.7}
 .share-button:focus-visible{outline:2px solid #165db7;outline-offset:2px}
 body.share-view .back,body.share-view .share-button{display:none!important}
 </style>

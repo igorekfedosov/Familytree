@@ -11,11 +11,6 @@ html.private-person-locked body > *:not(#private-person-gate){visibility:hidden!
 </style>
 <script>
 (function(){
-  const accessKey='familytree-private-person-access';
-  let allowed=false;
-  try{allowed=sessionStorage.getItem(accessKey)==='ok'}catch(error){}
-  if(allowed)return;
-
   document.documentElement.classList.add('private-person-locked');
   document.addEventListener('DOMContentLoaded',function(){
     const gate=document.createElement('div');
@@ -29,7 +24,6 @@ html.private-person-locked body > *:not(#private-person-gate){visibility:hidden!
     form.addEventListener('submit',function(event){
       event.preventDefault();
       if(input.value.trim()==='5158'){
-        try{sessionStorage.setItem(accessKey,'ok')}catch(storageError){}
         document.documentElement.classList.remove('private-person-locked');
         gate.remove();
       }else{
@@ -46,6 +40,7 @@ html.private-person-locked body > *:not(#private-person-gate){visibility:hidden!
 <div class="bio"><p>Родился 21 июня 1957 г. в г. Енакиево Украинской ССР. Там прошло его детство и школьные годы. В 1972 г. Анатолий окончил школу № 15, а в 1976 г. — Енакиевский металлургический техникум. В августе того же года он получил распре-деление на металлургический завод им. Петрова в Днепропетровске (ныне Днепр), а уже осенью отправился проходить военную службу в г. Балабаново, недалеко от Москвы. Спустя два года он отправился в г. Коммунарск (ныне Алчевск), где начал готовиться к поступлению в горно-металлургический институт.</p><p>Со своей будущей женой — <a href="https://igorekfedosov.github.io/Familytree/person/I500004.html" target="_blank" rel="noopener noreferrer">Ириной Мартынец</a> — Анатолий был знаком с детства, поскольку они росли в Енакиеве на одной улице. В 1979 г. они решили пожениться. Поскольку к тому моменту Анатолий жил в Коммунарске, а Ирина училась в Орле, подготовка к свадебному торжеству легла в основном на родителей, а вскоре после свадьбы супруги снова разъехались: Ирина вернулась учиться и работать в Орёл, а Анатолий продолжил осваивать профессию металлурга в Коммунарске. Учёба в институте длилась около шести лет. В 1981 г., когда у пары родился сын <a href="https://igorekfedosov.github.io/Familytree/person/I500074.html" target="_blank" rel="noopener noreferrer"><u>Денис</u></a>, супруги всё ещё находились в разных городах, но уже вскоре Ирина получила диплом и перебралась к мужу. Поначалу семья жила в съёмном жилье, чуть позже Ирине предоставили от завода комнату в коммунальной квартире, а к 1985 г., когда родилась дочь <a href="https://igorekfedosov.github.io/Familytree/person/I500002.html" target="_blank" rel="noopener noreferrer">Анна</a>, семья уже обосновалась в просторной трёхкомнатной квартире, которую Анатолию предоставили от металлургического завода как молодому специалисту. На Коммунарском заводе Анатолий трудился около семи лет: с 1984 по 1991 г.</p><p>В начале 1990-х гг. молодая семья решила вернуться в родной город. Для этого супругам пришлось обменять своё жильё на другую трёхкомнатную квартиру в Енакиеве. После переезда Анатолий перешёл на работу на Енакиевский металлургический завод.</p><p>В начале 1994 г. экономическая обстановка на Украине значительно ухудшилась, и Анатолий Иванович был вынужден искать работу в Москве. Там вплоть до выхода на пенсию он работал в сфере коммунальных услуг: сначала как простой дворник, а затем и на руководящей должности. Примерно в начале 2000-х гг. вступил в российское гражданство. После выхода на пенсию в 2010 г. Анатолий Иванович некоторое время работал кладовщиком на жилищно-коммунальном предприятии.</p><p>Примерно с 2011 г. и до настоящего момента большую часть времени проводит на даче в д. Меткино, под Москвой. Увлекается радиотехникой и ведением приусадебного хозяйства, следит за состоянием дачи.</p></div></main><!-- SHARE_CONTROLS_START -->
 <style>
 .share-button{display:inline-block;margin:0 0 20px 12px;padding:7px 12px;border:1px solid #aaa;border-radius:7px;background:#fff;color:#222;font:inherit;font-size:15px;line-height:1.4;cursor:pointer}
+main .person-photo{margin:12px 0 18px}main .person-photo img{display:block;width:auto;max-width:min(100%,420px);max-height:65vh;height:auto;object-fit:contain}main .bio{font-size:18px;line-height:1.7}
 .share-button:focus-visible{outline:2px solid #165db7;outline-offset:2px}
 body.share-view .back,body.share-view .share-button{display:none!important}
 </style>

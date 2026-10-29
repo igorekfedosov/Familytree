@@ -11,11 +11,6 @@ html.private-person-locked body > *:not(#private-person-gate){visibility:hidden!
 </style>
 <script>
 (function(){
-  const accessKey='familytree-private-person-access';
-  let allowed=false;
-  try{allowed=sessionStorage.getItem(accessKey)==='ok'}catch(error){}
-  if(allowed)return;
-
   document.documentElement.classList.add('private-person-locked');
   document.addEventListener('DOMContentLoaded',function(){
     const gate=document.createElement('div');
@@ -29,7 +24,6 @@ html.private-person-locked body > *:not(#private-person-gate){visibility:hidden!
     form.addEventListener('submit',function(event){
       event.preventDefault();
       if(input.value.trim()==='5158'){
-        try{sessionStorage.setItem(accessKey,'ok')}catch(storageError){}
         document.documentElement.classList.remove('private-person-locked');
         gate.remove();
       }else{
@@ -44,6 +38,7 @@ html.private-person-locked body > *:not(#private-person-gate){visibility:hidden!
 <!-- PRIVATE_PERSON_GATE_END --></head><body><main><a class="back" href="https://igorekfedosov.github.io/Familytree/">← К списку биографий</a><h1>Пелагея Васильевна Калашникова (Лоткова)</h1><div class="life-years"><strong>род. в 1937</strong></div><div class="person-photo"><img src="../photos/I503747.jpg" alt="Фото: Пелагея Васильевна Калашникова (Лоткова)" loading="lazy" decoding="async"></div><div class="ancestor-label" style="margin:0;line-height:1.1"><strong>семиюродная сестра прабабушки <span style="font-size:0.92em;font-weight:400">(<a href="../person/I500020.html" target="_blank" rel="noopener noreferrer" style="font:inherit;font-weight:400">Дарья Андреевна Филимонова</a>)</span></strong></div><div class="ancestor-label" style="margin:2px 0 22px;line-height:1.1"><strong>Расчетное ДНК-родство: ~0,00%</strong></div></main><!-- SHARE_CONTROLS_START -->
 <style>
 .share-button{display:inline-block;margin:0 0 20px 12px;padding:7px 12px;border:1px solid #aaa;border-radius:7px;background:#fff;color:#222;font:inherit;font-size:15px;line-height:1.4;cursor:pointer}
+main .person-photo{margin:12px 0 18px}main .person-photo img{display:block;width:auto;max-width:min(100%,420px);max-height:65vh;height:auto;object-fit:contain}main .bio{font-size:18px;line-height:1.7}
 .share-button:focus-visible{outline:2px solid #165db7;outline-offset:2px}
 body.share-view .back,body.share-view .share-button{display:none!important}
 </style>

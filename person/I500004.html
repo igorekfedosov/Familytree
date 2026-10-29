@@ -11,11 +11,6 @@ html.private-person-locked body > *:not(#private-person-gate){visibility:hidden!
 </style>
 <script>
 (function(){
-  const accessKey='familytree-private-person-access';
-  let allowed=false;
-  try{allowed=sessionStorage.getItem(accessKey)==='ok'}catch(error){}
-  if(allowed)return;
-
   document.documentElement.classList.add('private-person-locked');
   document.addEventListener('DOMContentLoaded',function(){
     const gate=document.createElement('div');
@@ -29,7 +24,6 @@ html.private-person-locked body > *:not(#private-person-gate){visibility:hidden!
     form.addEventListener('submit',function(event){
       event.preventDefault();
       if(input.value.trim()==='5158'){
-        try{sessionStorage.setItem(accessKey,'ok')}catch(storageError){}
         document.documentElement.classList.remove('private-person-locked');
         gate.remove();
       }else{
@@ -46,6 +40,7 @@ html.private-person-locked body > *:not(#private-person-gate){visibility:hidden!
 <div class="bio"><p>Девичья фамилия — Мартынец. Родилась 1 ноября 1955 г. в г. Енакиево Украинской ССР. Там в 1973 г. Ирина окончила школу № 15, а затем два года работала в жилищно-коммунальном управлении города. В 1975 г. она уехала в Орёл и поступила в филиал Всесоюзного заочного машиностроительного института, где училась на инженера-механика. В свободное от учёбы время Ирина работала в инструментальном цеху технологом лакокрасочного производства.</p><p>В 1979 г. Ирина вышла замуж за <a href="https://igorekfedosov.github.io/Familytree/person/I500005.html" target="_blank" rel="noopener noreferrer">Анатолия Бобкова</a>, с которым они росли по соседству на улице Панфилова в Енакиеве. Но уже вскоре ей пришлось вернуться в Орёл, чтобы продолжить учёбу. К началу 1981 г., когда подошло время родиться первенцу — Денису, — Ирина на время вернулась в Енакиево, но вскоре, оставив ребёнка с родителями, отправилась в Орёл для защиты дипломной работы. Лишь после этого, когда Ирина перебралась к мужу в Коммунарск, семья наконец воссоединилась. Там Ирина устроилась инженером на металлургический завод. В 1985 г. родилась дочь <a href="https://igorekfedosov.github.io/Familytree/person/I500002.html" target="_blank" rel="noopener noreferrer">Анна</a>. После декретного отпуска и вплоть до 1991 г. Ирина продолжала работать на заводе.</p><p>Затем семья вернулась в Енакиево, чтобы быть ближе к родителям. Там Ирина устроилась оператором котельного оборудования автобусного парка.</p><p>Со временем на том предприятии практически перестали платить зарплату. Такая же ситуация была и у мужа, поэтому в начале 1994 г. супруги решили уехать на заработки в Москву, где уже много лет проживала младшая сестра Ирины — <a href="https://igorekfedosov.github.io/Familytree/person/I500032.html" target="_blank" rel="noopener noreferrer">Ольга</a> (1959–2019). Та к тому времени уже стала директором предприятия в сфере жилищно-коммунального хозяйства. Она не только пригласила Анатолия и Ирину на работу, но и дала им жильё. Впрочем, труд, в основном связанный с уборкой и благоустройством дворов, был весьма тяжёлым. К тому же первое время Ирина с мужем находились в Москве без детей — их пришлось временно оставить на Украине. Лишь в начале 1995 г. удалось забрать к себе Анну, а в 1996 г. — Дениса. Ещё через некоторое время в Москву переехала и мать Ирины Ивановны — <a href="https://igorekfedosov.github.io/Familytree/person/I500025.html" target="_blank" rel="noopener noreferrer">Евдокия Дементьевна</a>. Таким образом все её родные постепенно перебрались в столицу. Впрочем, в 2018–2019 гг. семья, увы, вновь разделилась, когда все дети и внуки Ирины и Анатолия уехали жить за границу: семья Анны — в Германию, а семья Дениса — в США.</p><p>С 2010 г. Ирина Ивановна находится на пенсии. Около 20 лет она ухаживала за престарелой матерью, которая умерла в 2024 г. До настоящего времени Ирина Ивановна проживает в Москве. Любит читать, увлекается популярной медициной.</p></div></main><!-- SHARE_CONTROLS_START -->
 <style>
 .share-button{display:inline-block;margin:0 0 20px 12px;padding:7px 12px;border:1px solid #aaa;border-radius:7px;background:#fff;color:#222;font:inherit;font-size:15px;line-height:1.4;cursor:pointer}
+main .person-photo{margin:12px 0 18px}main .person-photo img{display:block;width:auto;max-width:min(100%,420px);max-height:65vh;height:auto;object-fit:contain}main .bio{font-size:18px;line-height:1.7}
 .share-button:focus-visible{outline:2px solid #165db7;outline-offset:2px}
 body.share-view .back,body.share-view .share-button{display:none!important}
 </style>
