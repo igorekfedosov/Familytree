@@ -11,6 +11,8 @@ html.private-person-locked body > *:not(#private-person-gate){visibility:hidden!
 </style>
 <script>
 (function(){
+  // Share links deliberately open without the living-person code prompt.
+  if(new URLSearchParams(window.location.search).get('share')==='1')return;
   document.documentElement.classList.add('private-person-locked');
   document.addEventListener('DOMContentLoaded',function(){
     const gate=document.createElement('div');
