@@ -77,6 +77,7 @@ body.photo-lightbox-open{overflow:hidden}
 @media(max-width:600px){
   #photo-lightbox{padding-top:max(64px,calc(env(safe-area-inset-top,0px) + 56px))}
   #photo-lightbox img{max-height:calc(100vh - 84px);max-height:calc(100dvh - 84px)}
+  #photo-lightbox .photo-lightbox-nav{display:none!important}
 }
 </style>
 <div id="photo-lightbox" role="dialog" aria-modal="true" aria-label="Просмотр фотографии" aria-hidden="true" hidden>
@@ -101,6 +102,7 @@ body.photo-lightbox-open{overflow:hidden}
   let galleryAnchors=[];
   let galleryIndex=-1;
   let touchStartX=null;
+  let lastSwipeAt=0;
 
   function setImage(anchor){
     let url;
@@ -121,6 +123,13 @@ body.photo-lightbox-open{overflow:hidden}
   function moveGallery(delta){
     if(galleryAnchors.length<2)return;
     showGalleryImage(galleryIndex+delta);
+  }
+
+  function updateNavigationButtons(){
+    const showButtons=galleryAnchors.length>1 &&
+      window.matchMedia('(min-width:601px)').matches;
+    prevButton.hidden=!showButtons;
+    nextButton.hidden=!showButtons;
   }
 
   function closeLightbox(){
@@ -151,9 +160,7 @@ body.photo-lightbox-open{overflow:hidden}
 
     if(galleryIndex>=0){
       showGalleryImage(galleryIndex);
-      const hasNavigation=galleryAnchors.length>1;
-      prevButton.hidden=!hasNavigation;
-      nextButton.hidden=!hasNavigation;
+      updateNavigationButtons();
       counter.hidden=false;
     }else{
       galleryAnchors=[];
@@ -193,6 +200,16 @@ body.photo-lightbox-open{overflow:hidden}
     if(event.target===modal)closeLightbox();
   });
 
+  image.addEventListener('click',function(event){
+    if(!window.matchMedia('(max-width:600px)').matches || galleryAnchors.length<2)return;
+    // Browsers emit a synthetic click after a swipe; ignore that click so
+    // one swipe advances exactly one photograph.
+    if(Date.now()-lastSwipeAt<500)return;
+    const bounds=image.getBoundingClientRect();
+    const localX=event.clientX-bounds.left;
+    moveGallery(localX<bounds.width/2 ? -1 : 1);
+  });
+
   image.addEventListener('touchstart',function(event){
     if(event.changedTouches && event.changedTouches.length){
       touchStartX=event.changedTouches[0].clientX;
@@ -204,8 +221,11 @@ body.photo-lightbox-open{overflow:hidden}
     const delta=event.changedTouches[0].clientX-touchStartX;
     touchStartX=null;
     if(Math.abs(delta)<45)return;
+    lastSwipeAt=Date.now();
     moveGallery(delta<0 ? 1 : -1);
   },{passive:true});
+
+  window.addEventListener('resize',updateNavigationButtons);
 
   document.addEventListener('keydown',function(event){
     if(!modal.classList.contains('is-open'))return;
