@@ -60,4 +60,87 @@ body.share-view .back,body.share-view .share-button{display:none!important}
   }
 })();
 </script>
-<!-- SHARE_CONTROLS_END --></body></html>
+<!-- SHARE_CONTROLS_END --><!-- PHOTO_LIGHTBOX_START -->
+<style>
+#photo-lightbox[hidden]{display:none!important}
+#photo-lightbox{position:fixed;inset:0;z-index:2147483646;display:none;align-items:center;justify-content:center;overflow:auto;overscroll-behavior:contain;padding:max(64px,calc(env(safe-area-inset-top,0px) + 56px)) max(12px,env(safe-area-inset-right,0px)) max(12px,env(safe-area-inset-bottom,0px)) max(12px,env(safe-area-inset-left,0px));background:rgba(0,0,0,.92)}
+#photo-lightbox.is-open{display:flex}
+#photo-lightbox img{display:block;width:auto;height:auto;max-width:100%;max-height:calc(100vh - 84px);max-height:calc(100dvh - 84px);object-fit:contain;border-radius:2px;box-shadow:0 8px 32px rgba(0,0,0,.5)}
+#photo-lightbox .photo-lightbox-close{position:absolute;top:max(8px,calc(env(safe-area-inset-top,0px) + 6px));right:max(8px,calc(env(safe-area-inset-right,0px) + 6px));z-index:1;display:flex;align-items:center;justify-content:center;width:48px;height:48px;margin:0;padding:0;border:1px solid rgba(255,255,255,.45);border-radius:50%;background:rgba(35,35,35,.9);color:#fff;font:32px/1 Arial,sans-serif;cursor:pointer;touch-action:manipulation}
+#photo-lightbox .photo-lightbox-close:focus-visible{outline:3px solid #fff;outline-offset:3px}
+body.photo-lightbox-open{overflow:hidden}
+@media(max-width:600px){
+  #photo-lightbox{padding-top:max(64px,calc(env(safe-area-inset-top,0px) + 56px))}
+  #photo-lightbox img{max-height:calc(100vh - 84px);max-height:calc(100dvh - 84px)}
+}
+</style>
+<div id="photo-lightbox" role="dialog" aria-modal="true" aria-label="Просмотр фотографии" aria-hidden="true" hidden>
+  <button class="photo-lightbox-close" type="button" aria-label="Закрыть фотографию">&times;</button>
+  <img alt="">
+</div>
+<script>
+(function(){
+  const modal=document.getElementById('photo-lightbox');
+  if(!modal || modal.dataset.initialized==='true')return;
+  modal.dataset.initialized='true';
+  const image=modal.querySelector('img');
+  const closeButton=modal.querySelector('.photo-lightbox-close');
+  let lastTrigger=null;
+
+  function closeLightbox(){
+    if(!modal.classList.contains('is-open'))return;
+    modal.classList.remove('is-open');
+    modal.hidden=true;
+    modal.setAttribute('aria-hidden','true');
+    image.removeAttribute('src');
+    document.body.classList.remove('photo-lightbox-open');
+    if(lastTrigger && lastTrigger.isConnected){
+      lastTrigger.focus({preventScroll:true});
+    }
+    lastTrigger=null;
+  }
+
+  function openLightbox(anchor,url){
+    lastTrigger=anchor;
+    const linkedImage=anchor.querySelector('img');
+    image.alt=((linkedImage && linkedImage.getAttribute('alt')) ||
+      anchor.getAttribute('aria-label') || anchor.textContent.trim() || 'Фотография').trim();
+    image.src=url.href;
+    modal.hidden=false;
+    modal.classList.add('is-open');
+    modal.setAttribute('aria-hidden','false');
+    document.body.classList.add('photo-lightbox-open');
+    closeButton.focus({preventScroll:true});
+  }
+
+  document.addEventListener('click',function(event){
+    if(event.defaultPrevented || event.button!==0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey)return;
+    const target=event.target;
+    const anchor=target && typeof target.closest==='function' ? target.closest('a[href]') : null;
+    if(!anchor || anchor.hasAttribute('download'))return;
+    let url;
+    try{url=new URL(anchor.getAttribute('href'),document.baseURI)}catch(error){return}
+    if(url.protocol!=='http:' && url.protocol!=='https:')return;
+    const isImageFile=/\.(?:avif|bmp|gif|jpe?g|png|webp|tiff?)$/i.test(url.pathname);
+    if(!isImageFile && !anchor.querySelector('img'))return;
+    event.preventDefault();
+    openLightbox(anchor,url);
+  },true);
+
+  closeButton.addEventListener('click',closeLightbox);
+  modal.addEventListener('click',function(event){
+    if(event.target===modal)closeLightbox();
+  });
+  document.addEventListener('keydown',function(event){
+    if(!modal.classList.contains('is-open'))return;
+    if(event.key==='Escape'){
+      event.preventDefault();
+      closeLightbox();
+    }else if(event.key==='Tab'){
+      event.preventDefault();
+      closeButton.focus();
+    }
+  });
+})();
+</script>
+<!-- PHOTO_LIGHTBOX_END --></body></html>
